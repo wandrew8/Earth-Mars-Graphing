@@ -30,15 +30,51 @@ body h2 {
   border: solid black 2px;
 }
 
+.bar {
+  fill: #0080ff;
+}
+
+.bar:hover {
+  fill: #003366;
+}
+
+.text {
+  fill: white;
+  font-family: sans-serif;
+}
+
+#marsGraph {
+  border: solid black 2px;
+  margin: 2rem;
+}
+#marsGraph svg {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  border: solid black 2px;
+  width: 500px;
+}
+#marsGraph rect {
+  margin: 0 auto;
+}
+
 @media all and (min-width: 480px) and (max-width: 768px) {
   .gridContainer {
     grid-template-columns: 1fr;
+    margin: 1rem;
+  }
+
+  #marsGraph {
     margin: 1rem;
   }
 }
 @media all and (max-width: 480px) {
   .gridContainer {
     grid-template-columns: 1fr;
+    margin: 0.5rem;
+  }
+
+  #marsGraph {
     margin: 0.5rem;
   }
 }

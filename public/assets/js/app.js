@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", function(event) {
     
     const options = {
@@ -41,6 +40,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         .then(response => response.json())
         .then(data =>  {
             postMarsData(data)
+            generateGraph(data)
         })
         .catch(error => console.log(error));
     }
@@ -52,7 +52,15 @@ document.addEventListener("DOMContentLoaded", function(event) {
     }
 
     function postMarsData(data) {
-        console.log(data)
+        const dataArray = Object.keys(data).map(sol => {
+            return data[sol];
+        });
+        const filteredArray = dataArray.filter(sol => sol.AT);
+        const aveTemp = filteredArray.map(sol => sol.AT.av);
+        const lowTemp = filteredArray.map(sol => sol.AT.mn);
+        const highTemp = filteredArray.map(sol => sol.AT.mx);
+        const dates = filteredArray.map(sol => new Date(sol.First_UTC));
+
     }
 
     function generateMap(lat, long) {
@@ -69,4 +77,42 @@ document.addEventListener("DOMContentLoaded", function(event) {
             })
           });
     }
+
+    function generateGraph(data) {
+
+    const dataArray = Object.keys(data).map(sol => {
+        return data[sol];
+    });
+    const filteredArray = dataArray.filter(sol => sol.AT);
+    console.log(filteredArray)
+    const aveTemp = filteredArray.map(sol => sol.AT.av);
+    const lowTemp = filteredArray.map(sol => sol.AT.mn);
+    const highTemp = filteredArray.map(sol => sol.AT.mx);
+    const dates = filteredArray.map(sol => new Date(sol.First_UTC));
+    const dataCollection = [...aveTemp, ...lowTemp, ...highTemp, ...dates];
+    
+    var svg = d3.select("#marsGraph").append("svg")
+          .attr("height","200px")
+          .attr("width","100%");
+
+    // Select, append to SVG, and add attributes to rectangles for bar chart
+    svg.selectAll("rect")
+        .data(aveTemp)
+        .enter().append("rect")
+            .attr("class", "bar")
+            .attr("height", function(d, i) {return d * -2})
+            .attr("width","80")
+            .attr("x", function(d, i) {return (i * 90) + 25})
+            .attr("y", function(d, i) {return 200 - (d * -2)});
+
+    // Select, append to SVG, and add attributes to text
+    svg.selectAll("text")
+        .data(aveTemp)
+        .enter().append("text")
+        .text(function(d) {return d})
+            .attr("class", "text")
+            .attr("x", function(d, i) {return (i * 90) + 36})
+            .attr("y", function(d, i) {return 230 - (d * -2)});
+        }
+
 })

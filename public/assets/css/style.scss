@@ -32,6 +32,34 @@ body {
   border: solid black 2px;
 }
 
+.bar {
+  fill: #0080ff;
+}
+
+.bar:hover {
+  fill: #003366;
+}
+
+.text {
+  fill: white;
+  font-family: sans-serif;
+}
+
+#marsGraph {
+  border: solid black 2px;
+  margin: 2rem;
+  svg {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    border: solid black 2px;
+    width: 500px;
+  }
+  rect {
+    margin: 0 auto;
+  }
+}
+
 // ------------------------------------------
 //  Responsive Grid Media Queries - 1280, 1024, 768, 480
 //   1280-1024   - desktop (default grid)
@@ -52,11 +80,17 @@ body {
     grid-template-columns: 1fr;
     margin: 1rem;
   }
+  #marsGraph {
+    margin: 1rem;
+  }
 }
 
 @media all and (max-width: 480px) {
   .gridContainer {
     grid-template-columns: 1fr;
+    margin: 0.5rem;
+  }
+  #marsGraph {
     margin: 0.5rem;
   }
 }
