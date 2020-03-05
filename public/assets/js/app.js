@@ -1,6 +1,6 @@
-const nasaUrl = "https://api.nasa.gov/insight_weather/?api_key=CgCQ474D810WdQ2jdcRZr7aZbd4DhxaFjBtdOTKb&feedtype=json&ver=1.0"
 
 document.addEventListener("DOMContentLoaded", function(event) {
+    
     const options = {
         enableHighAccuracy: true,
         timeout: 2000,
@@ -13,30 +13,46 @@ document.addEventListener("DOMContentLoaded", function(event) {
         console.log(`Latitude : ${crd.latitude}`);
         console.log(`Longitude: ${crd.longitude}`);
         console.log(`More or less ${crd.accuracy} meters.`);
-        generateMap(crd.latitude, crd.longitude)
+        generateMap(crd.latitude, crd.longitude);
         getWeatherData(crd.latitude, crd.longitude);
-
+        getMarsData();
     }
     
     function error(err) {
         console.warn(`ERROR(${err.code}): ${err.message}`);
     }
-    
+
     navigator.geolocation.getCurrentPosition(success, error, options);
-    
     
     function getWeatherData(lat, long) {
         const weatherUrl = `https://fcc-weather-api.glitch.me/api/current?lat=${lat.toFixed()}&lon=${long.toFixed()}`;
-        let html = '';
         // const weatherUrl = `https://www.api.openweathermap.org/data/2.5/weather?lat=${lat.toFixed()}&lon=${long.toFixed()}&appid=45d20cc421fedd596f1922360bb0d062`;
         fetch(weatherUrl)
-            .then(response => response.json())
-            .then(data =>  {
-                console.log(data.weather[0].icon)
-                html = `<h2>${data.name}</h2><img src=${data.weather[0].icon} alt=${data.weather[0].description}><p>${data.weather[0].description}</p>`
-                document.querySelector('.data').innerHTML = html;
-            })
-            
+        .then(response => response.json())
+        .then(data =>  {
+            postWeatherData(data)
+        })
+        .catch(error => console.log(error));
+    }
+    
+    function getMarsData() {
+        const nasaUrl = "https://api.nasa.gov/insight_weather/?api_key=CgCQ474D810WdQ2jdcRZr7aZbd4DhxaFjBtdOTKb&feedtype=json&ver=1.0"
+        fetch(nasaUrl)
+        .then(response => response.json())
+        .then(data =>  {
+            postMarsData(data)
+        })
+        .catch(error => console.log(error));
+    }
+    
+    function postWeatherData(data) {
+        let html = '';
+        html = `<h2>${data.name}</h2><img src=${data.weather[0].icon} alt=${data.weather[0].description}><p>${data.weather[0].description}</p>`
+        document.querySelector('.data').innerHTML = html;
+    }
+
+    function postMarsData(data) {
+        console.log(data)
     }
 
     function generateMap(lat, long) {
