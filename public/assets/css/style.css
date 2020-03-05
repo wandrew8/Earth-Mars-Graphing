@@ -1,13 +1,145 @@
-body {
-  text-align: center;
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
 }
-body h1 {
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+html {
+  text-align: center;
+  width: 100vw;
+}
+html h1 {
   font-size: 3rem;
   color: blue;
-}
-body h2 {
-  font-size: 1rem;
-  color: red;
 }
 
 .gridContainer {
@@ -17,9 +149,15 @@ body h2 {
   margin: 2rem;
 }
 
+.gridContainer2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 1fr);
+  grid-gap: 1rem;
+  margin: 2rem;
+}
+
 .map {
   height: 400px;
-  width: 100%;
 }
 .map a {
   color: #444;
@@ -45,17 +183,32 @@ body h2 {
 
 #marsGraph {
   border: solid black 2px;
-  margin: 2rem;
+  height: 200px;
 }
 #marsGraph svg {
   display: flex;
   flex-wrap: wrap;
   margin: 0 auto;
   border: solid black 2px;
-  width: 500px;
 }
 #marsGraph rect {
   margin: 0 auto;
+}
+
+#marsWeather {
+  display: grid;
+  padding: 1rem;
+  grid-template-columns: repeat(auto-fill, 200px);
+  grid-template-rows: auto;
+  grid-gap: 10px;
+  justify-content: center;
+  background: url("https://images.unsplash.com/photo-1527826507412-72e447368aa1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3070&q=80");
+}
+#marsWeather .tempInfo {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  border: solid #444 2px;
+  border-radius: 0.5rem;
 }
 
 @media all and (min-width: 480px) and (max-width: 768px) {

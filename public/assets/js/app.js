@@ -52,6 +52,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     }
 
     function postMarsData(data) {
+        const divEl = document.querySelector("#marsWeather");
         const dataArray = Object.keys(data).map(sol => {
             return data[sol];
         });
@@ -60,7 +61,20 @@ document.addEventListener("DOMContentLoaded", function(event) {
         const lowTemp = filteredArray.map(sol => sol.AT.mn);
         const highTemp = filteredArray.map(sol => sol.AT.mx);
         const dates = filteredArray.map(sol => new Date(sol.First_UTC));
+        console.log(dates.map(item => item))
+        filteredArray.forEach(item => {
 
+            let card = `
+                <div class="tempInfo">
+                    <h2>${new Date(item.First_UTC).toDateString()}</h2>
+                    <br>
+                    <p><b>High Temp:</b> ${item.AT.mx}</p>
+                    <p><b>Low Temp:</b> ${item.AT.mn}</p>
+                    <p><b>Average Temp:</b> ${item.AT.av}</p>
+                </div>
+            `
+            divEl.innerHTML += card;
+        })
     }
 
     function generateMap(lat, long) {
