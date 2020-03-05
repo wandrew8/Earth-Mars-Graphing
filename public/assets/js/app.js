@@ -13,7 +13,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
         console.log(`Latitude : ${crd.latitude}`);
         console.log(`Longitude: ${crd.longitude}`);
         console.log(`More or less ${crd.accuracy} meters.`);
-        getWeatherData(crd.latitude, crd.longitude)
+        generateMap(crd.latitude, crd.longitude)
+        getWeatherData(crd.latitude, crd.longitude);
+
     }
     
     function error(err) {
@@ -34,5 +36,21 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 html = `<h2>${data.name}</h2><img src=${data.weather[0].icon} alt=${data.weather[0].description}><p>${data.weather[0].description}</p>`
                 document.querySelector('.data').innerHTML = html;
             })
+            
+    }
+
+    function generateMap(lat, long) {
+        var map = new ol.Map({
+            target: 'map',
+            layers: [
+              new ol.layer.Tile({
+                source: new ol.source.OSM()
+              })
+            ],
+            view: new ol.View({
+              center: ol.proj.fromLonLat([long.toFixed(2), lat.toFixed(2)]),
+              zoom: 12
+            })
+          });
     }
 })

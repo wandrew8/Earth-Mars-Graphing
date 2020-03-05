@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/wandrew8/Earth-Mars-Graphing#readme",
   "dependencies": {
+    "ol": "^6.2.1",
     "sass": "^1.26.2"
   }
 }
