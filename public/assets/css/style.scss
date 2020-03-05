@@ -4,9 +4,11 @@
 html {
   text-align: center;
   width: 100vw;
+  font-family: $paragraph;
   h1 {
     font-size: 3rem;
     color: $secondary;
+    font-family: $heading;
   }
 }
 
@@ -63,19 +65,42 @@ html {
   }
 }
 
-#marsWeather {
-  display: grid;
-  padding: 1rem;
-  grid-template-columns: repeat(auto-fill, 200px);
-  grid-template-rows: auto;
-  grid-gap: 10px;
-  justify-content: center;
+.weather {
+  padding: 2rem 0rem;
+  color: white;
   background: url("https://images.unsplash.com/photo-1527826507412-72e447368aa1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3070&q=80");
+  #marsWeather {
+    display: grid;
+    padding: 1rem;
+    grid-template-columns: repeat(auto-fill, 200px);
+    grid-template-rows: auto;
+    grid-gap: 10px;
+    color: #fff;
+    justify-content: center;
+  }
   .tempInfo {
     background-color: rgba(0, 0, 0, 0.5);
-    color: #fff;
     border: solid #444 2px;
     border-radius: 0.5rem;
+    padding: 1.5rem 0rem;
+  }
+  h2 {
+    font-size: 2rem;
+    font-family: $heading;
+  }
+  p {
+    font-size: 1.1rem;
+    line-height: 2.8rem;
+    font-weight: 200;
+  }
+  h3 {
+    font-size: 1.2rem;
+    font-family: $paragraph;
+  }
+  .temp {
+    font-size: 0.9rem;
+    line-height: 1.2rem;
+    font-weight: 100;
   }
 }
 

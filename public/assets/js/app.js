@@ -66,11 +66,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
             let card = `
                 <div class="tempInfo">
-                    <h2>${new Date(item.First_UTC).toDateString()}</h2>
+                    <h3>${new Date(item.First_UTC).toDateString()}</h3>
                     <br>
-                    <p><b>High Temp:</b> ${item.AT.mx}</p>
-                    <p><b>Low Temp:</b> ${item.AT.mn}</p>
-                    <p><b>Average Temp:</b> ${item.AT.av}</p>
+                    <p class="temp"><b>High Temp:</b> ${item.AT.mx.toFixed()}<span>&#176;</span>F</p>
+                    <p class="temp"><b>Low Temp:</b> ${item.AT.mn.toFixed()}<span>&#176;</span>F</p>
+                    <p class="temp"><b>Average Temp:</b> ${item.AT.av.toFixed()}<span>&#176;</span>F</p>
                 </div>
             `
             divEl.innerHTML += card;
