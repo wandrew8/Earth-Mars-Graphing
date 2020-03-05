@@ -1,0 +1,13 @@
+@import "variables";
+
+body {
+  text-align: center;
+  h1 {
+    font-size: 3rem;
+    color: $secondary;
+  }
+  h2 {
+    font-size: 1rem;
+    color: $primary;
+  }
+}
