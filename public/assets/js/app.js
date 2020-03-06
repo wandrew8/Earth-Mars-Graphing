@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
             let cardForecast = `
                 <div class="item">
                     <h2>${new Date(item.dt_txt).toDateString()}</h2>
-                    <img src="http://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png" alt=${item.weather[0].description}>
+                    <img src="${getWeatherIcon(item.weather[0].icon)}" alt=${item.weather[0].description}>
                     <h4>${item.weather[0].description.toUpperCase()}</h4>
                     <div class="forecastConditions">
                         <p class="temp"><b>Temperature:</b>  ${kelvinToF(item.main.temp)}<span>&#176;</span>F</p>
@@ -84,11 +84,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
     function postWeatherData(data) {
         let html = '';
         const now = new Date;
+        console.log(data)
         html = `<h3>${now.toDateString()}<h3>
                 <h4>${data.weather[0].description.toUpperCase()}</h4>
                 <div class="gridContainer3">
                     <div>
-                        <img src="http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" alt=${data.weather[0].description}>
+                        <img src="${getWeatherIcon(data.weather[0].icon)}" alt=${data.weather[0].description}>
                     </div>
                     <div class="items">
                         <h4>Temperature</h4>
@@ -105,6 +106,41 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 </div>
                 `
         document.querySelector('.data').innerHTML = html;
+    }
+
+    function getWeatherIcon(icon) {
+        switch(icon) {
+            case "01d": 
+            case "01n":
+              return "public/assets/images/day.svg"
+              break;
+            case "02d":
+            case "02n":
+            case "03d":
+            case "03n":
+            case "04d":
+            case "04n":
+              return "public/assets/images/cloudy.svg"
+              break;
+            case "09d":
+            case "09n":
+              return "public/assets/images/rainy-6.svg"
+              break;
+            case "10d":
+            case "10n":
+              return "public/assets/images/rainy-5.svg"
+              break;
+            case "11d":
+            case "11n":
+              return "public/assets/images/thunder.svg"
+              break;
+            case "13d":
+            case "13n":
+              return "public/assets/images/snowy-6.svg"
+              break;
+            default:
+                return "public/assets/images/cloudy.svg"
+            }
     }
 
     function postMarsData(data) {

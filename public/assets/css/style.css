@@ -191,6 +191,16 @@ html h1 {
   font-family: sans-serif;
 }
 
+.forecastHeading {
+  font-family: "Spartan", sans-serif;
+  font-size: 2.5rem;
+  padding: 1rem 0rem;
+  background-color: #182c61;
+  font-weight: 200;
+  color: #fff;
+  margin-bottom: 0.25rem;
+}
+
 .forecast {
   height: auto;
   width: auto;
@@ -276,9 +286,13 @@ html h1 {
   justify-content: center;
 }
 .earthWeather h2 {
-  font-size: 2rem;
   font-family: "Spartan", sans-serif;
+  font-size: 1.5rem;
+  background-color: #182c61;
   font-weight: 200;
+  color: #fff;
+  margin-bottom: 0.25rem;
+  padding: 1rem 0rem;
 }
 .earthWeather h3 {
   font-size: 1.6rem;

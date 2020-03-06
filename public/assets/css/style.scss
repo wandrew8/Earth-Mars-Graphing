@@ -60,6 +60,16 @@ html {
   }
 }
 
+.forecastHeading {
+  font-family: $heading;
+  font-size: 2.5rem;
+  padding: 1rem 0rem;
+  background-color: $primary;
+  font-weight: 200;
+  color: #fff;
+  margin-bottom: 0.25rem;
+}
+
 .forecast {
   height: auto;
   width: auto;
@@ -144,9 +154,13 @@ html {
     justify-content: center;
   }
   h2 {
-    font-size: 2rem;
     font-family: $heading;
+    font-size: 1.5rem;
+    background-color: $primary;
     font-weight: 200;
+    color: #fff;
+    margin-bottom: 0.25rem;
+    padding: 1rem 0rem;
   }
   h3 {
     font-size: 1.6rem;
