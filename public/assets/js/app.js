@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", function(event) {
-    let fahrenheit = false;
-
+    localStorage.setItem("fahrenheit", "true")
+    let fahrenheit = localStorage.getItem("fahrenheit");
+    let latitude = localStorage.getItem("latitude"); 
+    let longitude = localStorage.getItem("longitude"); 
     const options = {
         enableHighAccuracy: true,
         timeout: 2000,
@@ -8,6 +10,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
     
     function success(pos) {
         const crd = pos.coords;
+        localStorage.setItem("latitude", crd.latitude);
+        localStorage.setItem("longitude", crd.longitude);
         generateMap(crd.latitude, crd.longitude);
         getWeatherData(crd.latitude, crd.longitude);
         getWeatherForecast(crd.latitude, crd.longitude);
@@ -60,17 +64,18 @@ document.addEventListener("DOMContentLoaded", function(event) {
     }
 
     function postWeatherForecast(data) {
+        let cardForecast = ''
         const dataArray = data.list;
         const daysArray = dataArray.filter(day => day.dt_txt.includes("12:00:00"));
         console.log(daysArray)
         daysArray.forEach(item => {
-            let cardForecast = `
+                cardForecast = `
                 <div class="item">
                     <h2>${new Date(item.dt_txt).toDateString()}</h2>
                     <img src="${getWeatherIcon(item.weather[0].icon)}" alt=${item.weather[0].description}>
                     <h4>${item.weather[0].description.toUpperCase()}</h4>
                     <div class="forecastConditions">
-                        <p class="temp"><b>Temperature:</b>  ${fahrenheit ? kelvinToF(item.main.temp) : kelvinToC(item.main.temp)}<span>&#176;</span>${fahrenheit ? "F" : "C"}</p>
+                        <p class="temp"><b>Temperature:</b>  ${localStorage.fahrenheit === "true" ? kelvinToF(item.main.temp) : kelvinToC(item.main.temp)}<span>&#176;</span>${localStorage.fahrenheit === "true" ? "F" : "C"}</p>
                         <p class="temp"><b>Humidity:</b>  ${item.main.humidity}%</p>
                     </div>
                 </div>
@@ -95,9 +100,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
                     </div>
                     <div class="items">
                         <h4>Temperature</h4>
-                        <p class="temp"><i class="fas fa-thermometer-half"></i><b>Current: </b><span class="tempCurr">${fahrenheit ? kelvinToF(data.main.temp) : kelvinToC(data.main.temp)}&#176;${fahrenheit ? "F" : "C"}</span></p>
-                        <p class="temp"><i class="fas fa-thermometer-full"></i><b>High: </b><span class="tempMax">${fahrenheit ? kelvinToF(data.main.temp_max) : kelvinToC(data.main.temp_max)}&#176;${fahrenheit ? "F" : "C"}</span></p>
-                        <p class="temp"><i class="fas fa-thermometer-empty"></i><b>Low: </b><span class="tempMin">${fahrenheit ? kelvinToF(data.main.temp_min) : kelvinToC(data.main.temp_min)}&#176;${fahrenheit ? "F" : "C"}</span></p>
+                        <p class="temp"><i class="fas fa-thermometer-half"></i><b>Current: </b><span class="tempCurr">${localStorage.fahrenheit == "true" ? kelvinToF(data.main.temp) : kelvinToC(data.main.temp)}&#176;${localStorage.fahrenheit == "true" ? "F" : "C"}</span></p>
+                        <p class="temp"><i class="fas fa-thermometer-full"></i><b>High: </b><span class="tempMax">${localStorage.fahrenheit == "true" ? kelvinToF(data.main.temp_max) : kelvinToC(data.main.temp_max)}&#176;${localStorage.fahrenheit == "true" ? "F" : "C"}</span></p>
+                        <p class="temp"><i class="fas fa-thermometer-empty"></i><b>Low: </b><span class="tempMin">${localStorage.fahrenheit == "true" ? kelvinToF(data.main.temp_min) : kelvinToC(data.main.temp_min)}&#176;${localStorage.fahrenheit == "true" ? "F" : "C"}</span></p>
                     </div>
                     <div class="items">
                         <h4>Conditions</h4>
@@ -118,18 +123,24 @@ document.addEventListener("DOMContentLoaded", function(event) {
     }
 
     function addEventListeners() {
-        let currTempVal = document.querySelector(".tempCurr").innerText;
-        document.querySelector("#tempF").addEventListener('click', function(event) {
-            console.log("You clicked");
-            fahrenheit = true;
-            console.log(fahrenheit)
-            location.reload(true);
+        document.querySelector("#tempF").addEventListener('click', function() {
+            console.log("You clicked F");
+            localStorage.setItem("fahrenheit", true);
+            console.log(localStorage)
+            console.log(localStorage.fahrenheit)
+            console.log(localStorage.getItem("fahrenheit"))
+            getWeatherData(parseFloat(latitude), parseFloat(longitude));
+            getWeatherForecast(parseFloat(latitude), parseFloat(longitude));
+             
+
+
         });
-        document.querySelector("#tempC").addEventListener('click', function(event) {
-            console.log('You clicked C');
-            fahrenheit = false;
-            console.log(fahrenheit);
-            location.reload(true);
+        document.querySelector("#tempC").addEventListener('click', function() {
+            localStorage.setItem("fahrenheit", false);
+            getWeatherData(parseFloat(latitude), parseFloat(longitude));
+            getWeatherForecast(parseFloat(latitude), parseFloat(longitude)); 
+
+
         })
 
 
