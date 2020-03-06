@@ -9,6 +9,7 @@ html {
     font-size: 3rem;
     color: $secondary;
     font-family: $heading;
+    padding-top: 3rem;
   }
 }
 
@@ -22,6 +23,7 @@ html {
 .gridContainer2 {
   display: grid;
   grid-template-columns: repeat(auto-fill, 1fr);
+  grid-template-rows: auto;
   grid-gap: 1rem;
   margin: 2rem;
 }
@@ -61,7 +63,6 @@ html {
 .forecast {
   height: auto;
   width: auto;
-  border: solid #182c61 2px;
   display: grid;
   grid-template-columns: repeat(5, minmax(200px, 1fr));
   grid-template-rows: auto;
@@ -75,6 +76,7 @@ html {
     display: flex;
     flex-direction: column;
     align-items: center;
+    border-radius: 0.5rem;
   }
   h2 {
     padding: 1rem 0rem;
@@ -83,9 +85,14 @@ html {
     color: #fff;
     align-self: flex-start;
     width: 100%;
+    font-weight: 200;
   }
   h4 {
     padding-bottom: 1rem;
+  }
+  p {
+    font-size: 1rem;
+    font-weight: 200;
   }
   .forecastConditions {
     height: 40px;
@@ -103,10 +110,6 @@ html {
   color: white;
   border-radius: 0.5rem;
   border: solid $primary 2px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   background: url("https://images.unsplash.com/photo-1548558685-a871f03dd4b0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3906&q=80");
   #marsWeather {
     display: grid;
@@ -123,7 +126,11 @@ html {
     grid-template-columns: repeat(3, minmax(150px, 1fr));
     grid-gap: 1rem;
     align-content: center;
-    height: 150px;
+    height: auto;
+    background-color: rgba(0, 0, 0, 0.2);
+    border: solid #182c61 2px;
+    border-radius: 0.5rem;
+    margin-top: 1rem;
   }
   img {
     height: auto;
@@ -202,10 +209,11 @@ html {
     font-size: 2rem;
     font-family: $heading;
   }
-  p {
+  .marsHeading {
     font-size: 1.1rem;
-    line-height: 2.8rem;
+    line-height: 1.2rem;
     font-weight: 200;
+    margin: 1.5rem 0rem;
   }
   h3 {
     font-size: 1.2rem;
@@ -231,6 +239,9 @@ html {
 }
 
 @media all and (min-width: 768px) and (max-width: 1024px) {
+  .gridContainer {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media all and (min-width: 480px) and (max-width: 768px) {
@@ -238,17 +249,41 @@ html {
     grid-template-columns: 1fr;
     margin: 1rem;
   }
+  .gridContainer2 {
+    margin: 0.75rem;
+  }
   #marsGraph {
     margin: 1rem;
+  }
+  .earthWeather {
+    .gridContainer3 {
+      padding: 1rem 1rem;
+      grid-template-columns: 1fr;
+      img {
+        width: auto;
+      }
+    }
   }
 }
 
 @media all and (max-width: 480px) {
   .gridContainer {
     grid-template-columns: 1fr;
-    margin: 0.5rem;
+    margin: 0.75rem;
   }
   #marsGraph {
-    margin: 0.5rem;
+    margin: 0.75rem;
+  }
+  .gridContainer2 {
+    margin: 0.75rem;
+  }
+  .earthWeather {
+    .gridContainer3 {
+      padding: 1rem 1rem;
+      grid-template-columns: 1fr;
+      img {
+        width: auto;
+      }
+    }
   }
 }
