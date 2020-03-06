@@ -154,10 +154,6 @@ html h1 {
 }
 
 .gridContainer2 {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 1fr);
-  grid-template-rows: auto;
-  grid-gap: 1rem;
   margin: 2rem;
 }
 
@@ -249,6 +245,7 @@ html h1 {
 .earthWeather {
   padding: 2rem 0rem;
   color: white;
+  position: relative;
   border-radius: 0.5rem;
   border: solid #182c61 2px;
   background: url("https://images.unsplash.com/photo-1548558685-a871f03dd4b0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3906&q=80");
@@ -314,6 +311,19 @@ html h1 {
 .earthWeather .data {
   margin-top: 2rem;
 }
+.earthWeather .tempToggle {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  opacity: 0.7;
+}
+.earthWeather .tempToggle span {
+  color: #fff;
+  font-size: 1.2rem;
+}
+.earthWeather .tempToggle:hover {
+  cursor: pointer;
+}
 
 #marsGraph {
   border: solid black 2px;
@@ -329,11 +339,19 @@ html h1 {
   margin: 0 auto;
 }
 
+.fas,
+.fa,
+.fab,
+.svg-inline--fa {
+  padding-right: 10px;
+}
+
 .marsWeather {
   padding: 2rem 0rem;
   color: white;
   border-radius: 0.5rem;
   border: solid #182c61 2px;
+  margin: 1rem 0rem;
   background: url("https://images.unsplash.com/photo-1527826507412-72e447368aa1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3070&q=80");
 }
 .marsWeather #marsWeather {

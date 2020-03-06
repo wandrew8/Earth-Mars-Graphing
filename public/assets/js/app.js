@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function(event) {
-    
+    let fahrenheit = false;
+
     const options = {
         enableHighAccuracy: true,
         timeout: 2000,
@@ -7,11 +8,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
     
     function success(pos) {
         const crd = pos.coords;
-        
-        console.log('Your current position is:');
-        console.log(`Latitude : ${crd.latitude}`);
-        console.log(`Longitude: ${crd.longitude}`);
-        console.log(`More or less ${crd.accuracy} meters.`);
         generateMap(crd.latitude, crd.longitude);
         getWeatherData(crd.latitude, crd.longitude);
         getWeatherForecast(crd.latitude, crd.longitude);
@@ -25,7 +21,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
     navigator.geolocation.getCurrentPosition(success, error, options);
     
     function getWeatherData(lat, long) {
-        // const weatherUrl = `https://fcc-weather-api.glitch.me/api/current?lat=${lat.toFixed()}&lon=${long.toFixed()}`;
         const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat.toFixed()}&lon=${long.toFixed()}&appid=45d20cc421fedd596f1922360bb0d062`;
         fetch(weatherUrl)
         .then(response => response.json())
@@ -37,6 +32,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
     
     function kelvinToF(temp) {
         return (9/5 * temp - 459.67).toFixed();
+    }
+
+    function kelvinToC(temp) {
+        return (temp - 273.15).toFixed();
     }
     
     function getWeatherForecast(lat, long) {
@@ -71,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                     <img src="${getWeatherIcon(item.weather[0].icon)}" alt=${item.weather[0].description}>
                     <h4>${item.weather[0].description.toUpperCase()}</h4>
                     <div class="forecastConditions">
-                        <p class="temp"><b>Temperature:</b>  ${kelvinToF(item.main.temp)}<span>&#176;</span>F</p>
+                        <p class="temp"><b>Temperature:</b>  ${fahrenheit ? kelvinToF(item.main.temp) : kelvinToC(item.main.temp)}<span>&#176;</span>${fahrenheit ? "F" : "C"}</p>
                         <p class="temp"><b>Humidity:</b>  ${item.main.humidity}%</p>
                     </div>
                 </div>
@@ -87,25 +86,53 @@ document.addEventListener("DOMContentLoaded", function(event) {
         console.log(data)
         html = `<h3>${now.toDateString()}<h3>
                 <h4>${data.weather[0].description.toUpperCase()}</h4>
+                <div class="tempToggle">
+                    <span id="tempF">&#176;F</span><span> / </span><span id="tempC">&#176;C</span>
+                </div>
                 <div class="gridContainer3">
                     <div>
                         <img src="${getWeatherIcon(data.weather[0].icon)}" alt=${data.weather[0].description}>
                     </div>
                     <div class="items">
                         <h4>Temperature</h4>
-                        <p class="temp"><b>Current:</b>  ${kelvinToF(data.main.temp)}<span>&#176;</span>F</p>
-                        <p class="temp"><b>High:</b>  ${kelvinToF(data.main.temp_min)}<span>&#176;</span>F</p>
-                        <p class="temp"><b>Low:</b>  ${kelvinToF(data.main.temp_max)}<span>&#176;</span>F</p>
+                        <p class="temp"><i class="fas fa-thermometer-half"></i><b>Current: </b><span class="tempCurr">${fahrenheit ? kelvinToF(data.main.temp) : kelvinToC(data.main.temp)}&#176;${fahrenheit ? "F" : "C"}</span></p>
+                        <p class="temp"><i class="fas fa-thermometer-full"></i><b>High: </b><span class="tempMax">${fahrenheit ? kelvinToF(data.main.temp_max) : kelvinToC(data.main.temp_max)}&#176;${fahrenheit ? "F" : "C"}</span></p>
+                        <p class="temp"><i class="fas fa-thermometer-empty"></i><b>Low: </b><span class="tempMin">${fahrenheit ? kelvinToF(data.main.temp_min) : kelvinToC(data.main.temp_min)}&#176;${fahrenheit ? "F" : "C"}</span></p>
                     </div>
                     <div class="items">
                         <h4>Conditions</h4>
-                        <p class="temp"><b>Humidity:</b>  ${data.main.humidity}%</p>
-                        <p class="temp"><b>Air Pressure:</b>  ${data.main.pressure} hPa</p>
-                        <p class="temp"><b>Wind Speed:</b>  ${data.wind.speed} MPH</p>
+                        <p class="temp"><i class="fas fa-tint"></i><b>Humidity:</b>  ${data.main.humidity}%</p>
+                        <p class="temp"><i class="fas fa-fan"></i><b>Air Pressure:</b>  ${data.main.pressure} hPa</p>
+                        <p class="temp"><i class="fas fa-wind"></i><b>Wind</b>  ${data.wind.speed} MPH</p>
                     </div>
                 </div>
                 `
         document.querySelector('.data').innerHTML = html;
+        addEventListeners();
+
+
+    }
+
+    function convertFToC(temp) {
+        return (5/9) * (temp - 32);
+    }
+
+    function addEventListeners() {
+        let currTempVal = document.querySelector(".tempCurr").innerText;
+        document.querySelector("#tempF").addEventListener('click', function(event) {
+            console.log("You clicked");
+            fahrenheit = true;
+            console.log(fahrenheit)
+            location.reload(true);
+        });
+        document.querySelector("#tempC").addEventListener('click', function(event) {
+            console.log('You clicked C');
+            fahrenheit = false;
+            console.log(fahrenheit);
+            location.reload(true);
+        })
+
+
     }
 
     function getWeatherIcon(icon) {
