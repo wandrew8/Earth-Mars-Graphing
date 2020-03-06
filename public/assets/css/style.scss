@@ -14,7 +14,7 @@ html {
 
 .gridContainer {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 2fr 1fr;
   grid-gap: 1rem;
   margin: 2rem;
 }
@@ -28,9 +28,17 @@ html {
 
 .map {
   height: 400px;
+  border-radius: 0.5rem;
+  li {
+    font-size: 0.7rem;
+  }
   a {
     color: #444;
     text-decoration: none;
+  }
+  .ol-viewport {
+    border-radius: 0.5rem;
+    border: solid $primary 2px;
   }
 }
 
@@ -51,6 +59,71 @@ html {
   font-family: sans-serif;
 }
 
+.earthWeather {
+  padding: 2rem 0rem;
+  color: white;
+  border-radius: 0.5rem;
+  border: solid $primary 2px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: url("https://images.unsplash.com/photo-1548558685-a871f03dd4b0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3906&q=80");
+  #marsWeather {
+    display: grid;
+    padding: 1rem;
+    grid-template-columns: repeat(auto-fill, 200px);
+    grid-template-rows: auto;
+    grid-gap: 10px;
+    color: #fff;
+    justify-content: center;
+  }
+  .gridContainer3 {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(3, minmax(150px, 1fr));
+    grid-gap: 1rem;
+    align-content: center;
+    height: 150px;
+  }
+  img {
+    height: auto;
+    width: 60%;
+    min-width: 100px;
+  }
+  .items {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+  }
+  h2 {
+    font-size: 2rem;
+    font-family: $heading;
+    font-weight: 200;
+  }
+  h3 {
+    font-size: 1.6rem;
+    margin: 0rem 0rem 1rem 0rem;
+    font-family: "Noto Sans JP", sans-serif;
+    font-weight: 200;
+  }
+  h4 {
+    font-size: 1.1rem;
+    font-family: $paragraph;
+    font-weight: 200;
+    margin: 0.5rem 0rem;
+  }
+  .temp {
+    font-size: 0.9rem;
+    line-height: 1.2rem;
+    font-weight: 100;
+  }
+  .data {
+    margin-top: 2rem;
+  }
+}
+
 #marsGraph {
   border: solid black 2px;
   height: 200px;
@@ -65,9 +138,11 @@ html {
   }
 }
 
-.weather {
+.marsWeather {
   padding: 2rem 0rem;
   color: white;
+  border-radius: 0.5rem;
+  border: solid $primary 2px;
   background: url("https://images.unsplash.com/photo-1527826507412-72e447368aa1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3070&q=80");
   #marsWeather {
     display: grid;

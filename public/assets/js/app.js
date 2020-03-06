@@ -22,10 +22,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
     }
 
     navigator.geolocation.getCurrentPosition(success, error, options);
+    // const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat.toFixed()}&lon=${long.toFixed()}&appid=45d20cc421fedd596f1922360bb0d062`;
     
     function getWeatherData(lat, long) {
-        const weatherUrl = `https://fcc-weather-api.glitch.me/api/current?lat=${lat.toFixed()}&lon=${long.toFixed()}`;
-        // const weatherUrl = `https://www.api.openweathermap.org/data/2.5/weather?lat=${lat.toFixed()}&lon=${long.toFixed()}&appid=45d20cc421fedd596f1922360bb0d062`;
+        // const weatherUrl = `https://fcc-weather-api.glitch.me/api/current?lat=${lat.toFixed()}&lon=${long.toFixed()}`;
+        const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat.toFixed()}&lon=${long.toFixed()}&appid=45d20cc421fedd596f1922360bb0d062`;
         fetch(weatherUrl)
         .then(response => response.json())
         .then(data =>  {
@@ -34,6 +35,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
         .catch(error => console.log(error));
     }
     
+    function kelvinToF(temp) {
+        return (9/5 * temp - 459.67).toFixed();
+    }
+
     function getMarsData() {
         const nasaUrl = "https://api.nasa.gov/insight_weather/?api_key=CgCQ474D810WdQ2jdcRZr7aZbd4DhxaFjBtdOTKb&feedtype=json&ver=1.0"
         fetch(nasaUrl)
@@ -47,7 +52,28 @@ document.addEventListener("DOMContentLoaded", function(event) {
     
     function postWeatherData(data) {
         let html = '';
-        html = `<h2>${data.name}</h2><img src=${data.weather[0].icon} alt=${data.weather[0].description}><p>${data.weather[0].description}</p>`
+        const now = new Date;
+        console.log(data)
+        html = `<h3>${now.toDateString()}<h3>
+                <h4>${data.weather[0].description.toUpperCase()}</h4>
+                <div class="gridContainer3">
+                    <div>
+                        <img src="http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" alt=${data.weather[0].description}>
+                    </div>
+                    <div class="items">
+                        <h4>Temperature</h4>
+                        <p class="temp"><b>Current:</b>  ${kelvinToF(data.main.temp)}<span>&#176;</span>F</p>
+                        <p class="temp"><b>High:</b>  ${kelvinToF(data.main.temp_min)}<span>&#176;</span>F</p>
+                        <p class="temp"><b>Low:</b>  ${kelvinToF(data.main.temp_max)}<span>&#176;</span>F</p>
+                    </div>
+                    <div class="items">
+                        <h4>Conditions</h4>
+                        <p class="temp"><b>Humidity:</b>  ${data.main.humidity}%</p>
+                        <p class="temp"><b>Air Pressure:</b>  ${data.main.pressure} hPa</p>
+                        <p class="temp"><b>Wind Speed:</b>  ${data.wind.speed} MPH</p>
+                    </div>
+                </div>
+                `
         document.querySelector('.data').innerHTML = html;
     }
 
@@ -61,9 +87,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         const lowTemp = filteredArray.map(sol => sol.AT.mn);
         const highTemp = filteredArray.map(sol => sol.AT.mx);
         const dates = filteredArray.map(sol => new Date(sol.First_UTC));
-        console.log(dates.map(item => item))
         filteredArray.forEach(item => {
-
             let card = `
                 <div class="tempInfo">
                     <h3>${new Date(item.First_UTC).toDateString()}</h3>
@@ -71,8 +95,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                     <p class="temp"><b>High Temp:</b> ${item.AT.mx.toFixed()}<span>&#176;</span>F</p>
                     <p class="temp"><b>Low Temp:</b> ${item.AT.mn.toFixed()}<span>&#176;</span>F</p>
                     <p class="temp"><b>Average Temp:</b> ${item.AT.av.toFixed()}<span>&#176;</span>F</p>
-                </div>
-            `
+                </div>`
             divEl.innerHTML += card;
         })
     }
@@ -94,39 +117,38 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
     function generateGraph(data) {
 
-    const dataArray = Object.keys(data).map(sol => {
-        return data[sol];
-    });
-    const filteredArray = dataArray.filter(sol => sol.AT);
-    console.log(filteredArray)
-    const aveTemp = filteredArray.map(sol => sol.AT.av);
-    const lowTemp = filteredArray.map(sol => sol.AT.mn);
-    const highTemp = filteredArray.map(sol => sol.AT.mx);
-    const dates = filteredArray.map(sol => new Date(sol.First_UTC));
-    const dataCollection = [...aveTemp, ...lowTemp, ...highTemp, ...dates];
-    
-    var svg = d3.select("#marsGraph").append("svg")
-          .attr("height","200px")
-          .attr("width","100%");
+        const dataArray = Object.keys(data).map(sol => {
+            return data[sol];
+        });
+        const filteredArray = dataArray.filter(sol => sol.AT);
+        const aveTemp = filteredArray.map(sol => sol.AT.av);
+        const lowTemp = filteredArray.map(sol => sol.AT.mn);
+        const highTemp = filteredArray.map(sol => sol.AT.mx);
+        const dates = filteredArray.map(sol => new Date(sol.First_UTC));
+        const dataCollection = [...aveTemp, ...lowTemp, ...highTemp, ...dates];
+        
+        var svg = d3.select("#marsGraph").append("svg")
+            .attr("height","200px")
+            .attr("width","100%");
 
-    // Select, append to SVG, and add attributes to rectangles for bar chart
-    svg.selectAll("rect")
-        .data(aveTemp)
-        .enter().append("rect")
-            .attr("class", "bar")
-            .attr("height", function(d, i) {return d * -2})
-            .attr("width","80")
-            .attr("x", function(d, i) {return (i * 90) + 25})
-            .attr("y", function(d, i) {return 200 - (d * -2)});
+        // Select, append to SVG, and add attributes to rectangles for bar chart
+        svg.selectAll("rect")
+            .data(aveTemp)
+            .enter().append("rect")
+                .attr("class", "bar")
+                .attr("height", function(d, i) {return d * -2})
+                .attr("width","80")
+                .attr("x", function(d, i) {return (i * 90) + 25})
+                .attr("y", function(d, i) {return 200 - (d * -2)});
 
-    // Select, append to SVG, and add attributes to text
-    svg.selectAll("text")
-        .data(aveTemp)
-        .enter().append("text")
-        .text(function(d) {return d})
-            .attr("class", "text")
-            .attr("x", function(d, i) {return (i * 90) + 36})
-            .attr("y", function(d, i) {return 230 - (d * -2)});
-        }
+        // Select, append to SVG, and add attributes to text
+        svg.selectAll("text")
+            .data(aveTemp)
+            .enter().append("text")
+            .text(function(d) {return d})
+                .attr("class", "text")
+                .attr("x", function(d, i) {return (i * 90) + 36})
+                .attr("y", function(d, i) {return 230 - (d * -2)});
+            }
 
 })
