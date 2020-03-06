@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         console.log(`More or less ${crd.accuracy} meters.`);
         generateMap(crd.latitude, crd.longitude);
         getWeatherData(crd.latitude, crd.longitude);
+        getWeatherForecast(crd.latitude, crd.longitude);
         getMarsData();
     }
     
@@ -22,7 +23,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
     }
 
     navigator.geolocation.getCurrentPosition(success, error, options);
-    // const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat.toFixed()}&lon=${long.toFixed()}&appid=45d20cc421fedd596f1922360bb0d062`;
     
     function getWeatherData(lat, long) {
         // const weatherUrl = `https://fcc-weather-api.glitch.me/api/current?lat=${lat.toFixed()}&lon=${long.toFixed()}`;
@@ -38,6 +38,16 @@ document.addEventListener("DOMContentLoaded", function(event) {
     function kelvinToF(temp) {
         return (9/5 * temp - 459.67).toFixed();
     }
+    
+    function getWeatherForecast(lat, long) {
+        const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat.toFixed()}&lon=${long.toFixed()}&appid=45d20cc421fedd596f1922360bb0d062`;
+        fetch(forecastUrl)
+        .then(response => response.json())
+        .then(data =>  {
+            postWeatherForecast(data)
+        })
+        .catch(error => console.log(error));
+    }
 
     function getMarsData() {
         const nasaUrl = "https://api.nasa.gov/insight_weather/?api_key=CgCQ474D810WdQ2jdcRZr7aZbd4DhxaFjBtdOTKb&feedtype=json&ver=1.0"
@@ -49,11 +59,31 @@ document.addEventListener("DOMContentLoaded", function(event) {
         })
         .catch(error => console.log(error));
     }
+
+    function postWeatherForecast(data) {
+        const dataArray = data.list;
+        const daysArray = dataArray.filter(day => day.dt_txt.includes("12:00:00"));
+        console.log(daysArray)
+        daysArray.forEach(item => {
+            let cardForecast = `
+                <div class="item">
+                    <h2>${new Date(item.dt_txt).toDateString()}</h2>
+                    <img src="http://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png" alt=${item.weather[0].description}>
+                    <h4>${item.weather[0].description.toUpperCase()}</h4>
+                    <div class="forecastConditions">
+                        <p class="temp"><b>Temperature:</b>  ${kelvinToF(item.main.temp)}<span>&#176;</span>F</p>
+                        <p class="temp"><b>Humidity:</b>  ${item.main.humidity}%</p>
+                    </div>
+                </div>
+    
+            `
+            document.querySelector(".forecast").innerHTML += cardForecast;
+        })
+    }
     
     function postWeatherData(data) {
         let html = '';
         const now = new Date;
-        console.log(data)
         html = `<h3>${now.toDateString()}<h3>
                 <h4>${data.weather[0].description.toUpperCase()}</h4>
                 <div class="gridContainer3">

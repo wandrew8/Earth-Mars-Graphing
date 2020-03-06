@@ -190,19 +190,43 @@ html h1 {
 }
 
 .forecast {
-  height: 300px;
+  height: auto;
   width: auto;
   border: solid #182c61 2px;
   display: grid;
-  grid-template-columns: repeat(7, minmax(200px, 1fr));
+  grid-template-columns: repeat(5, minmax(200px, 1fr));
   grid-template-rows: auto;
-  grid-gap: 1rem;
-  overflow: scroll;
+  grid-gap: 0.5rem;
+  overflow: auto;
+  justify-items: center;
 }
 .forecast .item {
   width: 200px;
   border: solid #182c61 2px;
-  height: 95%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.forecast h2 {
+  padding: 1rem 0rem;
+  font-size: 1.1rem;
+  background-color: #182c61;
+  color: #fff;
+  align-self: flex-start;
+  width: 100%;
+}
+.forecast h4 {
+  padding-bottom: 1rem;
+}
+.forecast .forecastConditions {
+  height: 40px;
+  background-color: #182c61;
+  width: 100%;
+  padding: 1rem 0rem;
+  color: #fff;
+  line-height: 1.2rem;
+  align-self: flex-end;
 }
 
 .earthWeather {
