@@ -175,21 +175,34 @@ html h1 {
   border: solid #182c61 2px;
 }
 
-.data {
+#marsGraph .data {
   border: solid black 2px;
 }
-
-.bar {
+#marsGraph .bar {
   fill: #0080ff;
 }
-
-.bar:hover {
+#marsGraph .bar:hover {
   fill: #003366;
 }
-
-.text {
+#marsGraph .text {
   fill: white;
   font-family: sans-serif;
+}
+
+.forecast {
+  height: 300px;
+  width: auto;
+  border: solid #182c61 2px;
+  display: grid;
+  grid-template-columns: repeat(7, minmax(200px, 1fr));
+  grid-template-rows: auto;
+  grid-gap: 1rem;
+  overflow: scroll;
+}
+.forecast .item {
+  width: 200px;
+  border: solid #182c61 2px;
+  height: 95%;
 }
 
 .earthWeather {
