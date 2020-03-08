@@ -33,6 +33,27 @@ document.addEventListener("DOMContentLoaded", function(event) {
         })
         .catch(error => console.log(error));
     }
+
+    function searchByZip(zip) {
+        const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?zip=${zip},us&appid=45d20cc421fedd596f1922360bb0d062`;
+        fetch(weatherUrl)
+        .then(response => response.json())
+        .then(data =>  {
+            postWeatherData(data)
+        })
+        .catch(error => console.log(error));
+    }
+
+    function convertZipToCoord(zip) {
+        const proxyURL = 'https://cors-anywhere.herokuapp.com/';
+        const url = `https://www.zipcodeapi.com/rest/zvDU2yGt7e22hPw2xu8px42H6qOdyzuUqnmhq9cqcFNUsf9Dyfj90pWF9xAdBfiI/info.json/${zip}/degrees`;
+        fetch(proxyURL + url)
+        .then(response => response.json())
+        .then(data =>  {
+            console.log(data)
+        })
+        .catch(error => console.log(error));
+    }
     
     function kelvinToF(temp) {
         return (9/5 * temp - 459.67).toFixed();
@@ -287,5 +308,15 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 .attr("x", function(d, i) {return (i * 90) + 36})
                 .attr("y", function(d, i) {return 230 - (d * -2)});
             }
+
+        const inputEl = document.querySelector('#zip-code');
+        const form = document.querySelector(".search-zip");
+        form.addEventListener("submit", function(e) {
+            e.preventDefault();
+            searchByZip(inputEl.value);
+            convertZipToCoord(inputEl.value);
+            console.log(inputEl.value)
+            inputEl.value = '';
+        })
 
 })
