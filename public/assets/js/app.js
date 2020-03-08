@@ -64,14 +64,15 @@ document.addEventListener("DOMContentLoaded", function(event) {
     }
 
     function postWeatherForecast(data) {
-        let cardForecast = ''
+        let nodeEl = document.querySelector(".forecast");
+        nodeEl.innerHTML = '';
         const dataArray = data.list;
         const daysArray = dataArray.filter(day => day.dt_txt.includes("12:00:00"));
         console.log(daysArray)
         daysArray.forEach(item => {
                 cardForecast = `
                 <div class="item">
-                    <h2>${new Date(item.dt_txt).toDateString()}</h2>
+                    <h2>${formatDate(new Date(item.dt_txt).toDateString())}</h2>
                     <img src="${getWeatherIcon(item.weather[0].icon)}" alt=${item.weather[0].description}>
                     <h4>${item.weather[0].description.toUpperCase()}</h4>
                     <div class="forecastConditions">
@@ -81,7 +82,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 </div>
     
             `
-            document.querySelector(".forecast").innerHTML += cardForecast;
+            nodeEl.innerHTML += cardForecast;
         })
     }
     
@@ -89,7 +90,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         let html = '';
         const now = new Date;
         console.log(data)
-        html = `<h3>${now.toDateString()}<h3>
+        html = `<h3>${formatDate(now.toDateString())}<h3>
                 <h4>${data.weather[0].description.toUpperCase()}</h4>
                 <div class="tempToggle">
                     <span id="tempF">&#176;F</span><span> / </span><span id="tempC">&#176;C</span>
@@ -120,6 +121,33 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
     function convertFToC(temp) {
         return (5/9) * (temp - 32);
+    }
+
+    function formatDate(date) {
+        const array = date.split(' ')
+        const dateNum = parseInt(array[2]);
+
+        if (dateNum === 1 || dateNum === 21) {
+            return `${array[0]} ${array[1]} ${removeZero(array[2])}st, ${array[3]}`
+        }
+        else if (dateNum === 2 || dateNum === 22) {
+            return `${array[0]} ${array[1]} ${removeZero(array[2])}nd, ${array[3]}`
+        }
+        else if (dateNum === 3 || dateNum === 23) {
+            return `${array[0]} ${array[1]} ${removeZero(array[2])}rd, ${array[3]}`
+        }
+        else {
+            return `${array[0]} ${array[1]} ${removeZero(array[2])}th, ${array[3]}`
+        }
+    }
+
+    function removeZero(day) {
+        const array = day.toString().split('');
+        if (array[0] === "0") {
+            return array[1]
+        } else {
+            return array.join("");
+        }
     }
 
     function addEventListeners() {
@@ -194,7 +222,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         filteredArray.forEach(item => {
             let card = `
                 <div class="tempInfo">
-                    <h3>${new Date(item.First_UTC).toDateString()}</h3>
+                    <h3>${formatDate(new Date(item.First_UTC).toDateString())}</h3>
                     <br>
                     <p class="temp"><b>High Temp:</b> ${item.AT.mx.toFixed()}<span>&#176;</span>F</p>
                     <p class="temp"><b>Low Temp:</b> ${item.AT.mn.toFixed()}<span>&#176;</span>F</p>
