@@ -324,6 +324,15 @@ html h1 {
 .earthWeather .tempToggle:hover {
   cursor: pointer;
 }
+.earthWeather .selected {
+  opacity: 0.5;
+}
+.earthWeather #tempF {
+  transition: ease-in 200ms;
+}
+.earthWeather #tempC {
+  transition: ease-in 200ms;
+}
 
 #marsGraph {
   border: solid black 2px;

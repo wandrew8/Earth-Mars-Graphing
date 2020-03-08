@@ -192,6 +192,15 @@ html {
   .tempToggle:hover {
     cursor: pointer;
   }
+  .selected {
+    opacity: 0.5;
+  }
+  #tempF {
+    transition: ease-in 200ms;
+  }
+  #tempC {
+    transition: ease-in 200ms;
+  }
 }
 
 #marsGraph {

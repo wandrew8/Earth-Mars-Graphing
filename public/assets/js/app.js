@@ -41,6 +41,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
     function kelvinToC(temp) {
         return (temp - 273.15).toFixed();
     }
+
+    function convertFToC(temp) {
+        return (5/9) * (temp - 32);
+    }
     
     function getWeatherForecast(lat, long) {
         const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat.toFixed()}&lon=${long.toFixed()}&appid=45d20cc421fedd596f1922360bb0d062`;
@@ -83,7 +87,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
     
             `
             nodeEl.innerHTML += cardForecast;
-        })
+        });
+        toggleClasses();
     }
     
     function postWeatherData(data) {
@@ -115,12 +120,19 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 `
         document.querySelector('.data').innerHTML = html;
         addEventListeners();
-
-
+        
     }
 
-    function convertFToC(temp) {
-        return (5/9) * (temp - 32);
+    function toggleClasses() {
+        console.log(localStorage.fahrenheit)
+        if (localStorage.fahrenheit === "true") {
+            document.querySelector("#tempF").classList.remove('selected');
+            document.querySelector("#tempC").classList.add('selected');
+        }
+        else {
+            document.querySelector("#tempF").classList.add('selected');
+            document.querySelector("#tempC").classList.remove('selected');
+        }
     }
 
     function formatDate(date) {
@@ -156,22 +168,15 @@ document.addEventListener("DOMContentLoaded", function(event) {
             localStorage.setItem("fahrenheit", true);
             console.log(localStorage)
             console.log(localStorage.fahrenheit)
-            console.log(localStorage.getItem("fahrenheit"))
+            console.log(localStorage.getItem("fahrenheit"));
             getWeatherData(parseFloat(latitude), parseFloat(longitude));
             getWeatherForecast(parseFloat(latitude), parseFloat(longitude));
-             
-
-
         });
         document.querySelector("#tempC").addEventListener('click', function() {
             localStorage.setItem("fahrenheit", false);
             getWeatherData(parseFloat(latitude), parseFloat(longitude));
             getWeatherForecast(parseFloat(latitude), parseFloat(longitude)); 
-
-
         })
-
-
     }
 
     function getWeatherIcon(icon) {
