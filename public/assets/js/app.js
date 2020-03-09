@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         getWeatherData(crd.latitude, crd.longitude);
         getWeatherForecast(crd.latitude, crd.longitude);
         getMarsData();
+        getNewsArticles();
     }
     
     function error(err) {
@@ -90,6 +91,19 @@ document.addEventListener("DOMContentLoaded", function(event) {
         .catch(error => console.log(error));
     }
 
+    function getNewsArticles() {
+        const today = new Date();
+        const dateString = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
+        const url = `http://newsapi.org/v2/everything?q=weather&from=${dateString}&sortBy=popularity&apiKey=1607dbe0f68548328a153148fe3b9431`;
+        fetch(url)
+        .then(response => response.json())
+        .then(data =>  {
+           console.log(data)
+           postNewsArticles(data)
+        })
+        .catch(error => console.log(error));
+    }
+
     function showLocation(data) {
         document.querySelector(".zipCode").textContent = data.zip_code;
         document.querySelector(".city").textContent = `${data.city}, ${data.state}`;
@@ -118,6 +132,28 @@ document.addEventListener("DOMContentLoaded", function(event) {
             nodeEl.innerHTML += cardForecast;
         });
         toggleClasses();
+    }
+
+    function postNewsArticles(data) {
+        let nodeEl = document.querySelector(".articles");
+        nodeEl.innerHTML = '';
+        let articleCard
+        data.articles.forEach(article => {
+                articleCard = `
+                <div class="article">
+                    <a href="${article.url}" target="_blank">
+                        <h2>${article.title}</h2>
+                    </a>
+                    <img src="${article.urlToImage}"/>
+                    <h4>${article.author}</h4>
+                    <div class="forecastConditions">
+                        <p class="text">${article.description}</p>
+                    </div>
+                </div>
+    
+            `
+            nodeEl.innerHTML += articleCard;
+        });
     }
     
     function postWeatherData(data) {
