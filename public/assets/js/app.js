@@ -50,7 +50,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
         fetch(proxyURL + url)
         .then(response => response.json())
         .then(data =>  {
-            console.log(data)
+            console.log(data);
+            generateMap(data.lat, data.lng);
+            showLocation(data);
         })
         .catch(error => console.log(error));
     }
@@ -86,6 +88,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
             generateGraph(data)
         })
         .catch(error => console.log(error));
+    }
+
+    function showLocation(data) {
+        document.querySelector(".zipCode").textContent = data.zip_code;
+        document.querySelector(".city").textContent = `${data.city}, ${data.state}`;
+        document.querySelector(".location-heading").textContent = `WEATHER CONDITIONS IN ${data.city.toUpperCase()}`
     }
 
     function postWeatherForecast(data) {
@@ -259,6 +267,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     }
 
     function generateMap(lat, long) {
+        document.querySelector("#map").innerHTML = '';
         var map = new ol.Map({
             target: 'map',
             layers: [
