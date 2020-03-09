@@ -19,6 +19,7 @@
   </head>
   <body>
     <header>
+      <div class="logo"></div>
       <form class="search-zip">
         <input
           name="zipCode"
@@ -30,12 +31,15 @@
         />
         <button type="submit">Search</button>
       </form>
+      <div class="location-info">
+        <span class="zipCode"></span><span class="city"></span>
+      </div>
     </header>
     <h1>Mars and Earth Graph Project</h1>
     <main>
       <div class="gridContainer">
         <div class="earthWeather">
-          <h2>WEATHER CONDITIONS NEAR YOU</h2>
+          <h2 class="location-heading">WEATHER CONDITIONS NEAR YOU</h2>
           <div class="data"></div>
         </div>
         <div id="map" class="map"></div>
@@ -44,6 +48,10 @@
         <div>
           <h2 class="forecastHeading">FIVE DAY WEATHER FORECAST</h2>
           <div class="forecast"></div>
+        </div>
+        <div>
+          <h2 class="forecastHeading">TOP NEWS HEADLINES</h2>
+          <div class="articles"></div>
         </div>
         <div class="marsWeather">
           <h2>Weather on Mars</h2>

@@ -23,7 +23,18 @@ document.addEventListener("DOMContentLoaded", function(event) {
         console.warn(`ERROR(${err.code}): ${err.message}`);
     }
 
-    navigator.geolocation.getCurrentPosition(success, error, options);
+    if (!latitude) {
+        navigator.geolocation.getCurrentPosition(success, error, options);
+    } else {
+        const lat = parseFloat(localStorage.getItem("latitude"));
+        const long = parseFloat(localStorage.getItem("longitude"));
+        console.log(lat, long)
+        generateMap(lat, long);
+        getWeatherData(lat, long);
+        getWeatherForecast(lat, long);
+        getMarsData();
+        getNewsArticles();
+    }
     
     function getWeatherData(lat, long) {
         const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat.toFixed()}&lon=${long.toFixed()}&appid=45d20cc421fedd596f1922360bb0d062`;
