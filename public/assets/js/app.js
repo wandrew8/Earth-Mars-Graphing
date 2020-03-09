@@ -105,7 +105,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     function getNewsArticles() {
         const today = new Date();
         const dateString = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
-        const url = `http://newsapi.org/v2/everything?q=weather&from=${dateString}&sortBy=popularity&apiKey=1607dbe0f68548328a153148fe3b9431`;
+        const url = `http://newsapi.org/v2/everything?q=weather%forecast&from=${dateString}&sortBy=relevancy&apiKey=1607dbe0f68548328a153148fe3b9431`;
         fetch(url)
         .then(response => response.json())
         .then(data =>  {
@@ -155,8 +155,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
                     <a href="${article.url}" target="_blank">
                         <h2>${article.title}</h2>
                     </a>
-                    <img src="${article.urlToImage}"/>
-                    <h4>${article.author}</h4>
+                    <img src="${article.urlToImage == null ? "https://images.unsplash.com/photo-1530908295418-a12e326966ba?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=60" : article.urlToImage}"/>
+                    <h4>${article.author.includes("@") || article.author.includes("/") || article.author.length > 20 ? article.source.name : article.author}</h4>
                     <div class="forecastConditions">
                         <p class="text">${article.description}</p>
                     </div>

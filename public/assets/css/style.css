@@ -153,6 +153,9 @@ header {
   background-color: #0c2461;
   border-bottom: solid #182c61 10px;
   color: #fff;
+  -webkit-box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
 }
 header .location-info {
   display: flex;
@@ -160,6 +163,21 @@ header .location-info {
 }
 header .zipCode {
   margin-right: 0.5rem;
+}
+header input {
+  border-radius: 0.5rem;
+  height: 1.5rem;
+  border: solid grey 3px;
+}
+header button {
+  color: #182c61;
+  background: #fff;
+  border-radius: 0.5rem;
+  padding: 0.25rem 1rem;
+  margin-left: 0.5rem;
+  -webkit-box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
 }
 
 .gridContainer {
@@ -187,6 +205,9 @@ header .zipCode {
 .map .ol-viewport {
   border-radius: 0.5rem;
   border: solid #182c61 2px;
+  -webkit-box-shadow: 3px 5px 5px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 3px 5px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 3px 5px 5px rgba(0, 0, 0, 0.2);
 }
 
 #marsGraph .data {
@@ -259,7 +280,7 @@ header .zipCode {
 }
 
 .articles {
-  height: auto;
+  height: 351px;
   width: auto;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
@@ -271,7 +292,7 @@ header .zipCode {
 .articles .article {
   width: 230px;
   border: solid #182c61 2px;
-  height: auto;
+  height: 345px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -319,6 +340,9 @@ header .zipCode {
   position: relative;
   border-radius: 0.5rem;
   border: solid #182c61 2px;
+  -webkit-box-shadow: 3px 5px 5px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 3px 5px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 3px 5px 5px rgba(0, 0, 0, 0.2);
   background: url("https://images.unsplash.com/photo-1548558685-a871f03dd4b0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3906&q=80");
 }
 .earthWeather #marsWeather {

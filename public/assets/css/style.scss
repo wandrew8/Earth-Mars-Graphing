@@ -20,12 +20,27 @@ header {
   background-color: $secondary;
   border-bottom: solid $primary 10px;
   color: #fff;
+  @include box-shadow(0px, 5px, 5px, rgba(0, 0, 0, 0.2));
+
   .location-info {
     display: flex;
     justify-content: center;
   }
   .zipCode {
     margin-right: 0.5rem;
+  }
+  input {
+    border-radius: 0.5rem;
+    height: 1.5rem;
+    border: solid grey 3px;
+  }
+  button {
+    color: $primary;
+    background: #fff;
+    border-radius: 0.5rem;
+    padding: 0.25rem 1rem;
+    margin-left: 0.5rem;
+    @include box-shadow(0px, 5px, 5px, rgba(0, 0, 0, 0.2));
   }
 }
 
@@ -43,6 +58,7 @@ header {
 .map {
   height: 400px;
   border-radius: 0.5rem;
+
   li {
     font-size: 0.7rem;
   }
@@ -53,6 +69,7 @@ header {
   .ol-viewport {
     border-radius: 0.5rem;
     border: solid $primary 2px;
+    @include box-shadow(3px, 5px, 5px, rgba(0, 0, 0, 0.2));
   }
 }
 
@@ -128,7 +145,7 @@ header {
 }
 
 .articles {
-  height: auto;
+  height: 351px;
   width: auto;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
@@ -139,7 +156,7 @@ header {
   .article {
     width: 230px;
     border: solid #182c61 2px;
-    height: auto;
+    height: 345px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -188,6 +205,7 @@ header {
   position: relative;
   border-radius: 0.5rem;
   border: solid $primary 2px;
+  @include box-shadow(3px, 5px, 5px, rgba(0, 0, 0, 0.2));
   background: url("https://images.unsplash.com/photo-1548558685-a871f03dd4b0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3906&q=80");
   #marsWeather {
     display: grid;
