@@ -3,6 +3,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
     let fahrenheit = localStorage.getItem("fahrenheit");
     let latitude = localStorage.getItem("latitude"); 
     let longitude = localStorage.getItem("longitude"); 
+    let zipCode = localStorage.getItem("zip");
+    let city = localStorage.getItem("city");
+    let state = localStorage.getItem("state");
+    console.log(localStorage)
     const options = {
         enableHighAccuracy: true,
         timeout: 2000,
@@ -12,9 +16,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
         const crd = pos.coords;
         localStorage.setItem("latitude", crd.latitude);
         localStorage.setItem("longitude", crd.longitude);
-        generateMap(crd.latitude, crd.longitude);
-        getWeatherData(crd.latitude, crd.longitude);
-        getWeatherForecast(crd.latitude, crd.longitude);
+        showLocation(zipCode, city, state);
+        generateMap(parseFloat(latitude), parseFloat(longitude));
+        getWeatherData(parseFloat(latitude), parseFloat(longitude));
+        getWeatherForecast(parseFloat(latitude), parseFloat(longitude));
         getMarsData();
         getNewsArticles();
     }
@@ -29,9 +34,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
         const lat = parseFloat(localStorage.getItem("latitude"));
         const long = parseFloat(localStorage.getItem("longitude"));
         console.log(lat, long)
-        generateMap(lat, long);
-        getWeatherData(lat, long);
-        getWeatherForecast(lat, long);
+        showLocation(zipCode, city, state);
+        generateMap(parseFloat(latitude), parseFloat(longitude));
+        getWeatherData(parseFloat(latitude), parseFloat(longitude));
+        getWeatherForecast(parseFloat(latitude), parseFloat(longitude));
         getMarsData();
         getNewsArticles();
     }
@@ -63,8 +69,17 @@ document.addEventListener("DOMContentLoaded", function(event) {
         .then(response => response.json())
         .then(data =>  {
             console.log(data);
-            generateMap(data.lat, data.lng);
-            showLocation(data);
+            localStorage.setItem("latitude", data.lat);
+            localStorage.setItem("longitude", data.lng);
+            localStorage.setItem("city", data.city);
+            localStorage.setItem("state", data.state);
+            localStorage.setItem("zipcode", data.zip_code);
+            console.log(localStorage)
+            generateMap(parseFloat(latitude), parseFloat(longitude));
+            showLocation(zipCode, city, state);
+            getWeatherData(parseFloat(latitude), parseFloat(longitude));
+            getWeatherForecast(parseFloat(latitude), parseFloat(longitude));
+            location.reload(true);
         })
         .catch(error => console.log(error));
     }
@@ -115,10 +130,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
         .catch(error => console.log(error));
     }
 
-    function showLocation(data) {
-        document.querySelector(".zipCode").textContent = data.zip_code;
-        document.querySelector(".city").textContent = `${data.city}, ${data.state}`;
-        document.querySelector(".location-heading").textContent = `WEATHER CONDITIONS IN ${data.city.toUpperCase()}`
+    function showLocation(zipCode, city, state) {
+        document.querySelector(".zipCode").textContent = `${zipCode ? zipCode : ''}`;
+        document.querySelector(".city").textContent = `${city ? city: ''}, ${state ? state: ''}`;
+        document.querySelector(".location-heading").textContent = `WEATHER CONDITIONS IN ${city ? city.toUpperCase(): ''}`
     }
 
     function postWeatherForecast(data) {
@@ -156,7 +171,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                         <h2>${article.title}</h2>
                     </a>
                     <img src="${article.urlToImage == null ? "https://images.unsplash.com/photo-1530908295418-a12e326966ba?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=60" : article.urlToImage}"/>
-                    <h4>${article.author.includes("@") || article.author.includes("/") || article.author.length > 20 ? article.source.name : article.author}</h4>
+                    <h4>${article.author == null || article.author.includes("@") || article.author.includes("/") || article.author.length > 20 ? article.source.name : article.author}</h4>
                     <div class="forecastConditions">
                         <p class="text">${article.description}</p>
                     </div>
@@ -369,9 +384,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
         const form = document.querySelector(".search-zip");
         form.addEventListener("submit", function(e) {
             e.preventDefault();
-            searchByZip(inputEl.value);
             convertZipToCoord(inputEl.value);
-            console.log(inputEl.value)
+            searchByZip(inputEl.value);
+            console.log(inputEl.value);
             inputEl.value = '';
         })
 
