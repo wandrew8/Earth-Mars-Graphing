@@ -141,21 +141,28 @@ html {
 }
 html h1 {
   font-size: 3rem;
-  color: #0c2461;
+  color: #fff;
   font-family: "Spartan", sans-serif;
-  padding-top: 3rem;
+  padding: 4.5rem 1rem;
+}
+
+main {
+  padding: 0.5rem 0rem;
+  -webkit-box-shadow: -5px -5px 10px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: -5px -5px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: -5px -5px 10px rgba(0, 0, 0, 0.2);
 }
 
 header {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  padding: 2rem 0rem;
+  padding: 0.5rem 0rem;
   background-color: #0c2461;
   border-bottom: solid #182c61 10px;
   color: #fff;
-  -webkit-box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
-  -moz-box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
-  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
 }
 header .location-info {
   display: flex;
@@ -168,6 +175,10 @@ header input {
   border-radius: 0.5rem;
   height: 1.5rem;
   border: solid grey 3px;
+  width: 100%;
+}
+header .search-zip {
+  padding: 0rem 0.5rem;
 }
 header button {
   color: #182c61;
@@ -178,6 +189,25 @@ header button {
   -webkit-box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
   -moz-box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
+}
+header .logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  position: relative;
+  height: 200px;
+}
+
+lottie-player {
+  width: 100%;
+  height: auto;
+  position: absolute;
+  bottom: 0rem;
+  right: 0rem;
+  z-index: -1;
 }
 
 .gridContainer {
@@ -338,6 +368,7 @@ header button {
   padding: 2rem 0rem;
   color: white;
   position: relative;
+  height: 337px;
   border-radius: 0.5rem;
   border: solid #182c61 2px;
   -webkit-box-shadow: 3px 5px 5px rgba(0, 0, 0, 0.2);
@@ -504,6 +535,16 @@ header button {
     margin: 1rem;
   }
 
+  header {
+    grid-template-columns: 1fr 1fr;
+  }
+  header #location {
+    display: none;
+  }
+  header .search-zip {
+    padding: 0rem 2rem;
+  }
+
   .gridContainer2 {
     margin: 0.75rem;
   }
@@ -524,6 +565,19 @@ header button {
   .gridContainer {
     grid-template-columns: 1fr;
     margin: 0.75rem;
+  }
+
+  header {
+    grid-template-columns: 1fr;
+  }
+  header #location {
+    display: none;
+  }
+  header .logo-container {
+    display: none;
+  }
+  header .search-zip {
+    padding: 0rem 2rem;
   }
 
   #marsGraph {

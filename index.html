@@ -13,14 +13,17 @@
       integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
       crossorigin="anonymous"
     />
-    <script type="text/javascript" src="d3.min.js"></script>
     <link rel="stylesheet" href="public/assets/css/style.css" />
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     <title>Document</title>
   </head>
   <body>
     <header>
-      <div class="logo"></div>
-      <form class="search-zip">
+      <div class="logo logo-container">
+        <p>WEATHER.COM</p>
+        <img src="public/assets/images/cloudy.svg" alt="" />
+      </div>
+      <form class="search-zip logo">
         <input
           name="zipCode"
           type="number"
@@ -31,11 +34,22 @@
         />
         <button type="submit">Search</button>
       </form>
-      <div class="location-info">
-        <span class="zipCode"></span><span class="city"></span>
+      <div id="location" class="location-info logo">
+        <i class="fas fa-map-marker-alt"></i><span class="zipCode"></span
+        ><span class="city"></span>
       </div>
     </header>
-    <h1>Mars and Earth Graph Project</h1>
+    <div class="title">
+      <h1>WEATHER FORECASTER</h1>
+      <lottie-player
+        src="https://assets7.lottiefiles.com/packages/lf20_xriVTL.json"
+        background="transparent"
+        speed="1"
+        loop
+        autoplay
+      >
+      </lottie-player>
+    </div>
     <main>
       <div class="gridContainer">
         <div class="earthWeather">
@@ -61,7 +75,6 @@
           </p>
           <div id="marsWeather"></div>
         </div>
-        <div id="marsGraph"></div>
       </div>
     </main>
     <script src="https://d3js.org/d3.v5.min.js"></script>
