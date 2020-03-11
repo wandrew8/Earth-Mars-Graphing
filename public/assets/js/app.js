@@ -183,7 +183,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                     <a href="${article.url}" target="_blank">
                         <h2>${article.title}</h2>
                     </a>
-                    <h4>${article.author == null || article.author.includes("@") || article.author.includes("/") || article.author.length > 20 ? article.source.name : article.author}</h4>
+                    <h4>${article.author == null || article.author.includes("@") || article.author.includes("/") || article.author.includes(".") || article.author.length > 20 ? article.source.name : article.author}</h4>
                     <div class="forecastConditions">
                         <p class="text">${article.description}</p>
                     </div>
@@ -201,10 +201,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
             <div>
                 <div class="article-slide">
                     <a href="${article.url}" target="_blank">
-                        <img src="${article.urlToImage}" alt="${article.title}">
+                        <img src="${article.urlToImage == null ? "https://images.unsplash.com/photo-1530908295418-a12e326966ba?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=60" : article.urlToImage}" alt="${article.title}">
                     </a>
                     <h3>${article.title}</h3>
-                    <p class="author">${article.author}</p>
+                    <p class="author">${article.author == null || article.author.includes("@") || article.author.includes("/") || article.author.includes(".") || article.author.length > 20 ? article.source.name : article.author}</p>
                     <p class="description">${article.description}</p>
                     <hr>
                 </div>
@@ -227,16 +227,16 @@ document.addEventListener("DOMContentLoaded", function(event) {
                         <img src="${getWeatherIcon(data.weather[0].icon)}" alt=${data.weather[0].description}>
                     </div>
                     <div class="items">
-                        <h4>Temperature</h4>
-                        <p class="temp"><i class="fas fa-thermometer-half"></i><b>Current: </b><span class="tempCurr">${localStorage.fahrenheit == "true" ? kelvinToF(data.main.temp) : kelvinToC(data.main.temp)}&#176;${localStorage.fahrenheit == "true" ? "F" : "C"}</span></p>
-                        <p class="temp"><i class="fas fa-thermometer-full"></i><b>High: </b><span class="tempMax">${localStorage.fahrenheit == "true" ? kelvinToF(data.main.temp_max) : kelvinToC(data.main.temp_max)}&#176;${localStorage.fahrenheit == "true" ? "F" : "C"}</span></p>
-                        <p class="temp"><i class="fas fa-thermometer-empty"></i><b>Low: </b><span class="tempMin">${localStorage.fahrenheit == "true" ? kelvinToF(data.main.temp_min) : kelvinToC(data.main.temp_min)}&#176;${localStorage.fahrenheit == "true" ? "F" : "C"}</span></p>
+                        <h4><i class="fas fa-thermometer-full"></i>Temperature</h4>
+                        <p class="temp"><b>Current: </b><span class="tempCurr">${localStorage.fahrenheit == "true" ? kelvinToF(data.main.temp) : kelvinToC(data.main.temp)}&#176;${localStorage.fahrenheit == "true" ? "F" : "C"}</span></p>
+                        <p class="temp"><b>High: </b><span class="tempMax">${localStorage.fahrenheit == "true" ? kelvinToF(data.main.temp_max) : kelvinToC(data.main.temp_max)}&#176;${localStorage.fahrenheit == "true" ? "F" : "C"}</span></p>
+                        <p class="temp"><b>Low: </b><span class="tempMin">${localStorage.fahrenheit == "true" ? kelvinToF(data.main.temp_min) : kelvinToC(data.main.temp_min)}&#176;${localStorage.fahrenheit == "true" ? "F" : "C"}</span></p>
                     </div>
                     <div class="items">
-                        <h4>Conditions</h4>
-                        <p class="temp"><i class="fas fa-tint"></i><b>Humidity:</b>  ${data.main.humidity}%</p>
-                        <p class="temp"><i class="fas fa-fan"></i><b>Air Pressure:</b>  ${data.main.pressure} hPa</p>
-                        <p class="temp"><i class="fas fa-wind"></i><b>Wind</b>  ${data.wind.speed} MPH</p>
+                        <h4><i class="fas fa-wind"></i>Conditions</h4>
+                        <p class="temp"><b>Humidity:</b>  ${data.main.humidity}%</p>
+                        <p class="temp"><b>Air Pressure:</b>  ${data.main.pressure} hPa</p>
+                        <p class="temp"><b>Wind</b>  ${data.wind.speed} MPH</p>
                     </div>
                 </div>
                 `

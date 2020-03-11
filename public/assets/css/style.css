@@ -318,7 +318,6 @@ lottie-player {
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto;
   grid-gap: 0.5rem;
-  overflow: auto;
   justify-items: center;
 }
 .articles .headArticle {
@@ -393,7 +392,7 @@ lottie-player {
   border-radius: 0.5rem;
 }
 .articles .article-slide h3 {
-  height: 35px;
+  height: 33px;
   overflow: hidden;
 }
 
@@ -577,7 +576,6 @@ lottie-player {
 
   .articles {
     grid-template-columns: 1fr;
-    overflow: visible;
     margin-bottom: 1rem;
   }
   .articles .headArticle {
@@ -645,7 +643,6 @@ lottie-player {
 
   .articles {
     grid-template-columns: 1fr;
-    overflow: visible;
     margin-bottom: 1rem;
   }
   .articles .headArticle {

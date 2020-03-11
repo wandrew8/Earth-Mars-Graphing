@@ -182,7 +182,6 @@ lottie-player {
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto;
   grid-gap: 0.5rem;
-  overflow: auto;
   justify-items: center;
   .headArticle {
     width: 100%;
@@ -256,7 +255,7 @@ lottie-player {
       border-radius: 0.5rem;
     }
     h3 {
-      height: 35px;
+      height: 33px;
       overflow: hidden;
     }
   }
@@ -450,7 +449,6 @@ lottie-player {
   }
   .articles {
     grid-template-columns: 1fr;
-    overflow: visible;
     margin-bottom: 1rem;
     .headArticle {
       height: auto;
@@ -515,7 +513,6 @@ lottie-player {
   }
   .articles {
     grid-template-columns: 1fr;
-    overflow: visible;
     margin-bottom: 1rem;
     .headArticle {
       height: auto;
