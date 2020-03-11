@@ -143,7 +143,9 @@ html h1 {
   font-size: 3rem;
   color: #fff;
   font-family: "Spartan", sans-serif;
-  padding: 4.5rem 1rem;
+  padding: 5rem 1rem;
+  background-color: rgba(0, 0, 0, 0.1);
+  color: #fff;
 }
 
 main {
@@ -368,7 +370,6 @@ lottie-player {
   padding: 2rem 0rem;
   color: white;
   position: relative;
-  height: 337px;
   border-radius: 0.5rem;
   border: solid #182c61 2px;
   -webkit-box-shadow: 3px 5px 5px rgba(0, 0, 0, 0.2);
@@ -545,6 +546,11 @@ lottie-player {
     padding: 0rem 2rem;
   }
 
+  .title h1 {
+    font-size: 3rem;
+    padding: 3.5rem;
+  }
+
   .gridContainer2 {
     margin: 0.75rem;
   }
@@ -578,6 +584,17 @@ lottie-player {
   }
   header .search-zip {
     padding: 0rem 2rem;
+  }
+  header .title h1 {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #444;
+  }
+
+  .title h1 {
+    background-color: rgba(0, 0, 0, 0.2);
+    color: #444;
+    padding: 4rem 0rem;
+    font-size: 2.5rem;
   }
 
   #marsGraph {

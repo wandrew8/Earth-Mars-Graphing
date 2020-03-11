@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         .then(response => response.json())
         .then(data =>  {
            console.log(data)
-           postNewsArticles(data)
+           filterNewsArticles(data)
         })
         .catch(error => console.log(error));
     }
@@ -160,11 +160,23 @@ document.addEventListener("DOMContentLoaded", function(event) {
         toggleClasses();
     }
 
+    function filterNewsArticles(data) {
+        const articles = data.articles;
+        const filteredArticles = articles.filter(article => {
+            const conditions = ['hot', 'cold', 'forecast', 'weather', 'snow', 'wind'];
+            const myRegex = new RegExp(conditions.join('|'));
+            return myRegex.test(article.description)
+        }) 
+        const filtered = filteredArticles.filter((article, i) => i >= 1)
+        console.log(filteredArticles)
+        postNewsArticles(filtered)
+    }
+
     function postNewsArticles(data) {
         let nodeEl = document.querySelector(".articles");
         nodeEl.innerHTML = '';
         let articleCard
-        data.articles.forEach(article => {
+        data.forEach(article => {
                 articleCard = `
                 <div class="article">
                     <a href="${article.url}" target="_blank">
