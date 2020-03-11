@@ -275,6 +275,7 @@ lottie-player {
   grid-gap: 0.5rem;
   overflow: auto;
   justify-items: center;
+  margin: 2rem 0rem;
 }
 .forecast .item {
   width: 200px;
@@ -312,35 +313,33 @@ lottie-player {
 }
 
 .articles {
-  height: 351px;
   width: auto;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  grid-template-columns: 1fr 1fr;
   grid-template-rows: auto;
   grid-gap: 0.5rem;
   overflow: auto;
   justify-items: center;
 }
-.articles .article {
-  width: 230px;
+.articles .headArticle {
+  width: 100%;
+  height: 700px;
   border: solid #182c61 2px;
-  height: 345px;
   display: flex;
   flex-direction: column;
   align-items: center;
   border-radius: 0.5rem;
 }
 .articles h2 {
-  padding: 1rem 0rem;
-  font-size: 1.1rem;
+  padding: 1rem 2rem;
+  font-size: 1.5rem;
+  line-height: 2rem;
   background-color: #182c61;
   color: #fff;
-  align-self: flex-start;
-  width: 100%;
   font-weight: 200;
   height: 75px;
   overflow: hidden;
-  align-content: center;
+  margin-bottom: 0.5rem;
 }
 .articles a {
   text-decoration: none;
@@ -353,9 +352,8 @@ lottie-player {
   font-weight: 200;
 }
 .articles img {
-  width: 95%;
-  margin-top: 5px;
-  height: 100px;
+  width: 100%;
+  height: 450px;
   object-fit: cover;
 }
 .articles .text {
@@ -363,6 +361,39 @@ lottie-player {
   line-height: 1.2rem;
   font-weight: 100;
   height: 100px;
+  overflow: hidden;
+  padding: 0rem 1rem 1rem 1rem;
+}
+.articles .extra-articles {
+  height: 700px;
+  overflow: auto;
+}
+.articles .article-slide {
+  padding: 0.5rem 1rem;
+  height: 125px;
+}
+.articles .article-slide .description {
+  height: 50px;
+  overflow: hidden;
+  margin: 0.5rem 0rem;
+}
+.articles .article-slide .author {
+  color: #444;
+  text-align: center;
+  font-size: 0.8rem;
+  padding: 0.25rem 0rem;
+}
+.articles .article-slide img {
+  float: left;
+  height: 90px;
+  width: 90px;
+  max-width: 100px;
+  object-fit: cover;
+  margin: 0rem 1rem;
+  border-radius: 0.5rem;
+}
+.articles .article-slide h3 {
+  height: 35px;
   overflow: hidden;
 }
 
@@ -536,6 +567,32 @@ lottie-player {
     margin: 1rem;
   }
 
+  .head-article {
+    margin-bottom: 1rem;
+  }
+
+  .extra-articles {
+    margin-bottom: 1rem;
+  }
+
+  .articles {
+    grid-template-columns: 1fr;
+    overflow: visible;
+    margin-bottom: 1rem;
+  }
+  .articles .headArticle {
+    height: auto;
+  }
+  .articles .text {
+    height: auto;
+  }
+  .articles h2 {
+    height: auto;
+  }
+  .articles .extra-articles {
+    height: auto;
+  }
+
   header {
     grid-template-columns: 1fr 1fr;
   }
@@ -573,8 +630,40 @@ lottie-player {
     margin: 0.75rem;
   }
 
+  .gridContainer {
+    grid-template-columns: 1fr;
+    margin: 1rem;
+  }
+
+  .head-article {
+    margin-bottom: 1rem;
+  }
+
+  .extra-articles {
+    margin-bottom: 1rem;
+  }
+
+  .articles {
+    grid-template-columns: 1fr;
+    overflow: visible;
+    margin-bottom: 1rem;
+  }
+  .articles .headArticle {
+    height: auto;
+  }
+  .articles .text {
+    height: auto;
+  }
+  .articles h2 {
+    height: auto;
+  }
+  .articles .extra-articles {
+    height: auto;
+  }
+
   header {
     grid-template-columns: 1fr;
+    padding: 1.5em 0rem 1rem 0rem;
   }
   header #location {
     display: none;

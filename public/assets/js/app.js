@@ -173,16 +173,16 @@ document.addEventListener("DOMContentLoaded", function(event) {
     }
 
     function postNewsArticles(data) {
-        let nodeEl = document.querySelector(".articles");
-        nodeEl.innerHTML = '';
+        let headEl = document.querySelector(".head-article");
+        headEl.innerHTML = '';
         let articleCard
-        data.forEach(article => {
+        const article = data[0];
                 articleCard = `
-                <div class="article">
+                <div class="headArticle">
+                    <img src="${article.urlToImage == null ? "https://images.unsplash.com/photo-1530908295418-a12e326966ba?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=60" : article.urlToImage}"/>
                     <a href="${article.url}" target="_blank">
                         <h2>${article.title}</h2>
                     </a>
-                    <img src="${article.urlToImage == null ? "https://images.unsplash.com/photo-1530908295418-a12e326966ba?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=60" : article.urlToImage}"/>
                     <h4>${article.author == null || article.author.includes("@") || article.author.includes("/") || article.author.length > 20 ? article.source.name : article.author}</h4>
                     <div class="forecastConditions">
                         <p class="text">${article.description}</p>
@@ -190,8 +190,27 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 </div>
     
             `
-            nodeEl.innerHTML += articleCard;
-        });
+            headEl.innerHTML += articleCard;
+
+        const extraEl = document.querySelector(".extra-articles");
+        extraEl.innerHTML = '';
+        let articleSlides
+        const otherArticles = data.filter((article, index) => index > 0 && index < 6);
+        otherArticles.forEach(article => {
+            articleSlides += `
+            <div>
+                <div class="article-slide">
+                    <a href="${article.url}" target="_blank">
+                        <img src="${article.urlToImage}" alt="${article.title}">
+                    </a>
+                    <h3>${article.title}</h3>
+                    <p class="author">${article.author}</p>
+                    <p class="description">${article.description}</p>
+                    <hr>
+                </div>
+            </div>`
+        })
+        extraEl.innerHTML += articleSlides;
     }
     
     function postWeatherData(data) {
