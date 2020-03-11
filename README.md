@@ -4,7 +4,7 @@
 
 Weather application that provides weather info for the user's current location, a five-day weather forecast, search capability, Fahrenheit - Celsius conversion, Weather news articles, and even a weather report from Mars.
 
-## Features
+## Features and Tech Used
 
 - Uses localstorage to store state of the temperature for the user to easily switch between Celsius and Fahrenehit units
 - Uses OpenWeather API to get search for data by geoLocation and zipcode
@@ -14,11 +14,15 @@ Weather application that provides weather info for the user's current location, 
 - Uses openLayers to generate map based on geoLocation
 - Built entirely from scratch with custom CSS (no bootstrap)
 - Mobile Responsive thanks to CSS grid system
-
-## Tech Used
-
 - Utilizes animations from [Lottie](https://lottiefiles.com/) and other free animated SVG icons from [here](https://www.amcharts.com/free-animated-svg-weather-icons/)
-- Various APIs including openweather, NASA, newsapi, and zipcodeapi.
+
+## Design
+
+This application is fully responsive thanks to CSS grid. Here are some screen shots.
+
+![desktop](./public/assets/images/desktop.gif)
+![ipad](./public/assets/images/ipad.gif)
+![iphone](./public/assets/images/iphone.gif)
 
 ## Contact Me
 
