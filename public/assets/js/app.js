@@ -120,7 +120,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     function getNewsArticles() {
         const today = new Date();
         const dateString = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
-        const url = `http://newsapi.org/v2/everything?q=weather%forecast&from=${dateString}&sortBy=relevancy&apiKey=1607dbe0f68548328a153148fe3b9431`;
+        const url = `https://newsapi.org/v2/everything?q=weather%forecast&from=${dateString}&sortBy=relevancy&apiKey=1607dbe0f68548328a153148fe3b9431`;
         fetch(url)
         .then(response => response.json())
         .then(data =>  {
