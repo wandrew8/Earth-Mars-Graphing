@@ -187,18 +187,14 @@ document.addEventListener("DOMContentLoaded", function(event) {
                     <div class="forecastConditions">
                         <p class="text">${article.description}</p>
                     </div>
-                </div>
-    
-            `
-            headEl.innerHTML += articleCard;
+                </div>`
+            headEl.innerHTML = articleCard;
 
         const extraEl = document.querySelector(".extra-articles");
-        extraEl.innerHTML = '';
         let articleSlides
         const otherArticles = data.filter((article, index) => index > 0 && index < 6);
         otherArticles.forEach(article => {
-            articleSlides += `
-            <div>
+            articleSlides = `<div>
                 <div class="article-slide">
                     <a href="${article.url}" target="_blank">
                         <img src="${article.urlToImage == null ? "https://images.unsplash.com/photo-1530908295418-a12e326966ba?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=60" : article.urlToImage}" alt="${article.title}">
@@ -209,8 +205,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
                     <hr>
                 </div>
             </div>`
+            extraEl.innerHTML += articleSlides;
         })
-        extraEl.innerHTML += articleSlides;
     }
     
     function postWeatherData(data) {
